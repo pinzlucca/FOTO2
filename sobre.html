@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Sentido Fotografia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        .font-serif-elegant { font-family: 'Cormorant Garamond', serif; }
+        .font-sans-body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FDFDFB; color: #1a1a1a; }
+        .link-underline { position: relative; text-decoration: none; }
+        .link-underline::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px; bottom: -2px; left: 0; background-color: #1a1a1a; transform-origin: bottom right; transition: transform 0.25s ease-out; }
+        .link-underline:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+    </style>
+</head>
+<body class="bg-[#FDFDFB]">
+
+    <!-- Cabeçalho -->
+    <header class="sticky top-0 left-0 w-full z-50 bg-[#FDFDFB]/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6 md:px-10 py-6 flex justify-between items-center">
+            <a href="index.html" class="font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
+            <nav class="hidden md:flex items-center space-x-10 text-sm tracking-widest uppercase">
+                <a href="sobre.html" class="link-underline text-gray-800 font-bold">Sobre</a>
+                <a href="galeria.html" class="link-underline text-gray-800">Portfólio</a>
+                <a href="index.html#contact" class="ml-4 px-6 py-2 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors">Contato</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-800"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg></button>
+        </div>
+    </header>
+    
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#FDFDFB] z-[100] flex flex-col items-center justify-center transition-transform duration-300 transform translate-x-full">
+        <button id="close-mobile-menu" class="absolute top-7 right-7 text-gray-800"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        <nav class="flex flex-col items-center space-y-10 text-2xl tracking-widest uppercase">
+            <a href="sobre.html" class="mobile-link">Sobre</a>
+            <a href="galeria.html" class="mobile-link">Portfólio</a>
+            <a href="index.html#contact" class="mobile-link">Contato</a>
+        </nav>
+    </div>
+
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="container mx-auto px-6 md:px-10">
+            <div class="relative h-[70vh] bg-cover bg-center flex items-center justify-center text-center" style="background-image: url('https://placehold.co/1600x900/BDB7AB/FFFFFF?text=Nossa+Equipe');">
+                <div class="absolute inset-0 bg-black/20"></div>
+                <div class="relative text-white">
+                    <h1 class="font-serif-elegant text-5xl md:text-7xl font-semibold">A arte de sentir e registrar</h1>
+                    <p class="font-sans-body mt-2 text-lg">Conheça quem está por trás das lentes da Sentido</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Introdução -->
+        <section class="py-24 md:py-32">
+            <div class="container mx-auto px-6 md:px-10 max-w-4xl text-center">
+                <h2 class="font-serif-elegant text-4xl md:text-5xl font-semibold leading-tight">Mais que fotógrafos, somos contadores de histórias.</h2>
+                <p class="font-sans-body text-base mt-6 leading-relaxed text-gray-600">
+                    Fundada sobre a crença de que a fotografia é a linguagem da memória, a Sentido nasceu do desejo de eternizar as conexões humanas em sua forma mais pura. Para nós, cada casamento é um universo particular, uma tapeçaria de emoções, sorrisos e lágrimas de alegria. Nossa missão é traduzir essa energia em imagens que não apenas mostram, mas que fazem sentir, hoje e para sempre.
+                </p>
+            </div>
+        </section>
+
+        <!-- Conheça os Fotógrafos -->
+        <section class="pb-24 md:pb-32 bg-white">
+            <div class="container mx-auto px-6 md:px-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <!-- Fotógrafo 1 -->
+                    <div class="text-center">
+                        <div class="relative w-full h-[50vh] max-w-md mx-auto bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/A3B18A/FFFFFF?text=Fotógrafo+1');"></div>
+                        <h3 class="font-serif-elegant text-4xl mt-8">Nome do Fotógrafo</h3>
+                        <p class="font-sans-body text-sm tracking-widest uppercase text-gray-500 mt-1">Fotógrafo Principal</p>
+                        <p class="font-sans-body text-base mt-4 max-w-md mx-auto text-gray-600">Com um olhar treinado para a luz e para os detalhes, ele busca a beleza nos momentos mais espontâneos, criando retratos que são ao mesmo tempo artísticos e verdadeiros.</p>
+                    </div>
+                    <!-- Fotógrafo 2 -->
+                    <div class="text-center md:mt-24">
+                        <div class="relative w-full h-[50vh] max-w-md mx-auto bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/D1C8B9/FFFFFF?text=Fotógrafa+2');"></div>
+                        <h3 class="font-serif-elegant text-4xl mt-8">Nome da Fotógrafa</h3>
+                        <p class="font-sans-body text-sm tracking-widest uppercase text-gray-500 mt-1">Fotógrafa e Diretora de Arte</p>
+                        <p class="font-sans-body text-base mt-4 max-w-md mx-auto text-gray-600">Especialista em capturar a emoção do ambiente, ela garante que a essência e a atmosfera de cada casamento sejam fielmente representadas em cada imagem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="py-24 text-center bg-[#F5F3F0]">
+            <div class="container mx-auto px-6 md:px-10">
+                <h2 class="font-serif-elegant text-4xl md:text-5xl font-semibold">Veja nosso trabalho em ação</h2>
+                <p class="font-sans-body text-base mt-4 max-w-2xl mx-auto text-gray-600">Explore as histórias que tivemos o privilégio de contar e inspire-se para o seu grande dia.</p>
+                <a href="galeria.html" class="inline-block mt-8 px-10 py-4 bg-gray-900 text-white hover:bg-[#A3B18A] hover:text-white transition-colors duration-300 text-sm tracking-widest uppercase">
+                    Explorar Portfólio
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-white py-16">
+        <div class="container mx-auto px-6 md:px-10 text-center text-gray-600">
+            <a href="index.html" class="font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
+            <div class="mt-8 flex justify-center space-x-8 text-xs tracking-widest uppercase">
+                 <a href="sobre.html" class="link-underline">Sobre</a>
+                 <a href="galeria.html" class="link-underline">Portfólio</a>
+                 <a href="index.html#contact" class="link-underline">Contato</a>
+            </div>
+            <p class="font-sans-body text-xs mt-8 text-gray-500">&copy; 2025 Sentido Fotografia. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- Lógica do Menu Mobile ---
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            const openMenu = () => mobileMenu.classList.remove('translate-x-full');
+            const closeMenu = () => mobileMenu.classList.add('translate-x-full');
+
+            mobileMenuButton.addEventListener('click', openMenu);
+            closeMobileMenuButton.addEventListener('click', closeMenu);
+            
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Apenas fecha o menu, a navegação padrão do link fará o resto
+                    closeMenu();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
