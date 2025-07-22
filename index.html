@@ -8,219 +8,122 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Cormorant Garamond (Serif) e Inter (Sans-serif) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilos personalizados e fontes */
-        .font-serif-elegant {
-            font-family: 'Cormorant Garamond', serif;
-        }
-        .font-sans-body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDFDFB;
-            color: #1a1a1a;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Efeito de sublinhado animado para links */
-        .link-underline {
-            position: relative;
-            text-decoration: none;
-        }
-        .link-underline::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: #1a1a1a;
-            transform-origin: bottom right;
-            transition: transform 0.25s ease-out;
-        }
-        .link-underline:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
+        /* ESTILOS GERAIS E FONTES */
+        .font-serif-elegant { font-family: 'Cormorant Garamond', serif; }
+        .font-sans-body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FDFDFB; color: #1a1a1a; cursor: none; } /* Esconde o cursor padrão */
         
-        /* Efeito de sobreposição de imagem para o portfólio */
-        .image-overlay-container {
-            position: relative;
-            display: block;
-        }
-        .image-overlay-container::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-color: #A3B18A;
-            z-index: 1;
-            mix-blend-mode: multiply;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .image-overlay-container:hover::after {
-            opacity: 0.4;
-        }
+        /* 1. CURSOR PERSONALIZADO */
+        .custom-cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
+        .cursor-dot { width: 8px; height: 8px; background-color: #1a1a1a; border-radius: 50%; transition: transform 0.2s ease-out; }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid #1a1a1a; border-radius: 50%; transition: transform 0.2s ease-out, opacity 0.2s ease-out; }
+        .cursor-grow .cursor-outline { transform: scale(1.5); opacity: 0.5; }
+        .cursor-grow .cursor-dot { transform: scale(0.75); }
 
-        /* Efeito de zoom para imagens nos cards */
-        .card-image {
-            transition: transform 0.4s ease-in-out;
-        }
-        .group:hover .card-image {
-            transform: scale(1.05);
-        }
+        /* 2. TRANSIÇÕES DE PÁGINA */
+        body { transition: opacity 0.5s ease-in-out; }
+        body.fade-out { opacity: 0; }
+
+        /* 3. ANIMAÇÕES DE SCROLL */
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .scroll-animate.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* EFEITOS DE HOVER */
+        .link-underline { position: relative; text-decoration: none; }
+        .link-underline::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px; bottom: -2px; left: 0; background-color: #1a1a1a; transform-origin: bottom right; transition: transform 0.25s ease-out; }
+        .link-underline:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        .image-overlay-container { position: relative; display: block; }
+        .image-overlay-container::after { content: ''; position: absolute; inset: 0; background-color: #A3B18A; z-index: 1; mix-blend-mode: multiply; opacity: 0; transition: opacity 0.3s ease-in-out; }
+        .image-overlay-container:hover::after { opacity: 0.4; }
+        .card-image { transition: transform 0.4s ease-in-out; }
+        .group:hover .card-image { transform: scale(1.05); }
     </style>
 </head>
 <body class="bg-[#FDFDFB]">
 
-    <!-- Cabeçalho e Navegação Minimalista -->
-    <header class="fixed top-0 left-0 w-full z-50 transition-colors duration-300">
+    <!-- Cursor Personalizado -->
+    <div class="custom-cursor cursor-outline"></div>
+    <div class="custom-cursor cursor-dot"></div>
+
+    <!-- Cabeçalho -->
+    <header class="fixed top-0 left-0 w-full z-50">
         <div class="container mx-auto px-6 md:px-10 py-6 flex justify-between items-center">
-            <a href="#hero" class="font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">
-                Sentido
-            </a>
+            <a href="index.html" class="interactive font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
             <nav class="hidden md:flex items-center space-x-10 text-sm tracking-widest uppercase">
-                <a href="galeria.html" class="link-underline text-gray-800">Sobre</a>
-                <a href="galeria.html" class="link-underline text-gray-800">Portfólio</a>
-                <a href="#contact" class="ml-4 px-6 py-2 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors duration-300">Contato</a>
+                <a href="sobre.html" class="interactive link-underline text-gray-800">Sobre</a>
+                <a href="galeria.html" class="interactive link-underline text-gray-800">Portfólio</a>
+                <a href="#contact" class="interactive ml-4 px-6 py-2 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors">Contato</a>
             </nav>
-            <button id="mobile-menu-button" class="md:hidden text-gray-800">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg>
-            </button>
+            <button id="mobile-menu-button" class="interactive md:hidden text-gray-800"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg></button>
         </div>
     </header>
     
-    <!-- Menu Mobile (Tela Cheia) -->
+    <!-- Menu Mobile -->
     <div id="mobile-menu" class="fixed inset-0 bg-[#FDFDFB] z-[100] flex flex-col items-center justify-center transition-transform duration-300 transform translate-x-full">
-        <button id="close-mobile-menu" class="absolute top-7 right-7 text-gray-800">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
+        <button id="close-mobile-menu" class="interactive absolute top-7 right-7 text-gray-800"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
         <nav class="flex flex-col items-center space-y-10 text-2xl tracking-widest uppercase">
-            <a href="#about" class="mobile-link">Sobre</a>
-            <a href="#portfolio" class="mobile-link">Portfólio</a>
-            <a href="#contact" class="mobile-link">Contato</a>
+            <a href="sobre.html" class="interactive mobile-link">Sobre</a>
+            <a href="galeria.html" class="interactive mobile-link">Portfólio</a>
+            <a href="#contact" class="interactive mobile-link">Contato</a>
         </nav>
     </div>
 
     <main>
-        <!-- Tela 01: Hero Section Elegante -->
-        <section id="hero" class="h-screen min-h-[700px] flex items-center justify-center text-center bg-cover bg-center bg-gray-200" style="background-image: url('https://placehold.co/1920x1280/EAE0D5/FFFFFF?text=Imagem+Principal+Aqui');">
-            <div class="bg-black/10 w-full h-full flex items-center justify-center">
-                <div class="text-white">
-                    <h1 class="font-serif-elegant text-6xl md:text-9xl font-semibold leading-none">Sentido</h1>
-                    <p class="font-sans-body tracking-widest uppercase text-sm mt-2">Fotografia de Casamento</p>
-                </div>
-            </div>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen min-h-[700px] flex items-center justify-center text-center bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1280/EAE0D5/FFFFFF?text=Imagem+Principal');">
+            <div class="bg-black/10 w-full h-full flex items-center justify-center"><div class="text-white"><h1 class="font-serif-elegant text-6xl md:text-9xl font-semibold leading-none">Sentido</h1><p class="font-sans-body tracking-widest uppercase text-sm mt-2">Fotografia de Casamento</p></div></div>
         </section>
 
-        <!-- Tela 02: Sobre (Layout Assimétrico) -->
-        <section id="about" class="py-24 md:py-32">
+        <!-- Sobre -->
+        <section id="about" class="py-24 md:py-32 overflow-hidden">
             <div class="container mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
-                <div class="md:col-span-5">
-                    <div class="w-full h-[60vh] max-h-[500px] bg-gray-300 bg-cover bg-center" style="background-image: url('https://placehold.co/800x1200/BDB7AB/FFFFFF?text=Retrato');"></div>
-                </div>
-                <div class="md:col-span-7 lg:col-span-6 lg:col-start-7">
-                    <h2 class="font-serif-elegant text-5xl md:text-6xl font-semibold">Nossa paixão é contar a sua história.</h2>
-                    <p class="font-sans-body text-base mt-6 leading-relaxed text-gray-600">Acreditamos que cada casal tem uma narrativa única, cheia de momentos que merecem ser eternizados. Com um olhar sensível e artístico, a Sentido Fotografia se dedica a capturar a essência, a emoção e a beleza do seu dia, transformando instantes em memórias que durarão para sempre.</p>
-                    <a href="#portfolio" class="font-sans-body inline-block mt-8 tracking-widest uppercase text-sm link-underline">Ver nosso trabalho</a>
-                </div>
+                <div class="md:col-span-5 scroll-animate"><div class="w-full h-[60vh] max-h-[500px] bg-cover bg-center" style="background-image: url('https://placehold.co/800x1200/BDB7AB/FFFFFF?text=Retrato');"></div></div>
+                <div class="md:col-span-7 lg:col-span-6 lg:col-start-7 scroll-animate" style="transition-delay: 200ms;"><h2 class="font-serif-elegant text-5xl md:text-6xl font-semibold">Nossa paixão é contar a sua história.</h2><p class="font-sans-body text-base mt-6 leading-relaxed text-gray-600">Acreditamos que cada casal tem uma narrativa única, cheia de momentos que merecem ser eternizados. Com um olhar sensível e artístico, a Sentido Fotografia se dedica a capturar a essência, a emoção e a beleza do seu dia.</p><a href="galeria.html" class="interactive font-sans-body inline-block mt-8 tracking-widest uppercase text-sm link-underline">Ver nosso trabalho</a></div>
             </div>
         </section>
         
-        <!-- NOVA SEÇÃO: Cards de Navegação -->
-        <section id="navigation-cards" class="py-12 bg-white">
-            <div class="container mx-auto px-6 md:px-10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                    <!-- Card Sobre Nós -->
-                    <a href="#" class="group relative block h-[50vh] overflow-hidden">
-                        <div class="card-image w-full h-full bg-cover bg-center bg-gray-300" style="background-image: url('https://placehold.co/800x1000/D1C8B9/FFFFFF?text=Sobre+Nós');"></div>
-                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                            <h3 class="font-serif-elegant text-white text-4xl font-semibold">Sobre Nós</h3>
-                        </div>
-                    </a>
-                    <!-- Card Casamentos -->
-                     <a href="#" class="group relative block h-[50vh] overflow-hidden">
-                        <div class="card-image w-full h-full bg-cover bg-center bg-gray-300" style="background-image: url('https://placehold.co/800x1000/A3B18A/FFFFFF?text=Casamentos');"></div>
-                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                            <h3 class="font-serif-elegant text-white text-4xl font-semibold">Casamentos</h3>
-                        </div>
-                    </a>
-                    <!-- Card Portfólio -->
-                     <a href="#" class="group relative block h-[50vh] overflow-hidden">
-                        <div class="card-image w-full h-full bg-cover bg-center bg-gray-300" style="background-image: url('https://placehold.co/800x1000/BDB7AB/FFFFFF?text=Portfólio');"></div>
-                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
-                            <h3 class="font-serif-elegant text-white text-4xl font-semibold">Portfólio</h3>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <!-- Cards de Navegação -->
+        <section id="navigation-cards" class="py-12 bg-white overflow-hidden">
+            <div class="container mx-auto px-6 md:px-10"><div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <a href="sobre.html" class="interactive group relative block h-[50vh] overflow-hidden scroll-animate"><div class="card-image w-full h-full bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/D1C8B9/FFFFFF?text=Sobre+Nós');"></div><div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center"><h3 class="font-serif-elegant text-white text-4xl font-semibold">Sobre Nós</h3></div></a>
+                <a href="galeria.html" class="interactive group relative block h-[50vh] overflow-hidden scroll-animate" style="transition-delay: 200ms;"><div class="card-image w-full h-full bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/A3B18A/FFFFFF?text=Casamentos');"></div><div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center"><h3 class="font-serif-elegant text-white text-4xl font-semibold">Casamentos</h3></div></a>
+                <a href="galeria.html" class="interactive group relative block h-[50vh] overflow-hidden scroll-animate" style="transition-delay: 400ms;"><div class="card-image w-full h-full bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/BDB7AB/FFFFFF?text=Portfólio');"></div><div class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors flex items-center justify-center"><h3 class="font-serif-elegant text-white text-4xl font-semibold">Portfólio</h3></div></a>
+            </div></div>
         </section>
 
-        <!-- Chamada para o Portfólio (Parallax Sutil) -->
+        <!-- Chamada Parallax -->
         <section class="h-[60vh] bg-cover bg-center bg-fixed flex items-center justify-center text-center text-white" style="background-image: url('https://placehold.co/1920x1080/333333/FFFFFF?text=Detalhes');">
-             <div class="bg-black/30 w-full h-full flex items-center justify-center">
-                <div class="max-w-3xl px-6">
-                    <h3 class="font-serif-elegant text-4xl md:text-6xl font-semibold">O amor está nos detalhes</h3>
-                    <p class="font-sans-body mt-4 text-base leading-relaxed">De sorrisos espontâneos a olhares cúmplices, nossa lente busca a beleza que reside nos pequenos gestos.</p>
-                </div>
-            </div>
+             <div class="bg-black/30 w-full h-full flex items-center justify-center"><div class="max-w-3xl px-6 scroll-animate"><h3 class="font-serif-elegant text-4xl md:text-6xl font-semibold">O amor está nos detalhes</h3><p class="font-sans-body mt-4 text-base leading-relaxed">De sorrisos espontâneos a olhares cúmplices, nossa lente busca a beleza que reside nos pequenos gestos.</p></div></div>
         </section>
 
-        <!-- Portfólio (Grid Elegante) -->
-        <section id="portfolio" class="py-24 md:py-32 bg-white">
+        <!-- Preview do Portfólio -->
+        <section id="portfolio" class="py-24 md:py-32 bg-white overflow-hidden">
             <div class="container mx-auto px-6 md:px-10">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                     <h2 class="font-serif-elegant text-5xl md:text-6xl font-semibold">Portfólio</h2>
-                     <p class="font-sans-body text-base mt-4 leading-relaxed text-gray-600">Uma seleção de casamentos e momentos que tivemos a honra de registrar. Deixe-se inspirar.</p>
-                </div>
+                <div class="text-center max-w-2xl mx-auto mb-16 scroll-animate"><h2 class="font-serif-elegant text-5xl md:text-6xl font-semibold">Portfólio</h2><p class="font-sans-body text-base mt-4 leading-relaxed text-gray-600">Uma seleção de casamentos e momentos que tivemos a honra de registrar. Deixe-se inspirar.</p></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                    <div class="md:col-span-1">
-                        <a href="#" class="image-overlay-container h-[70vh] bg-gray-300 bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/A3B18A/FFFFFF?text=Casamento+1');"></a>
-                    </div>
-                    <div class="md:col-span-1">
-                         <a href="#" class="image-overlay-container h-[70vh] bg-gray-300 bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/EAE0D5/FFFFFF?text=Casamento+2');"></a>
-                    </div>
-                    <div class="md:col-span-2">
-                         <a href="#" class="image-overlay-container h-[60vh] bg-gray-300 bg-cover bg-center" style="background-image: url('https://placehold.co/1600x900/BDB7AB/FFFFFF?text=Casamento+3');"></a>
-                    </div>
+                    <div class="md:col-span-1 scroll-animate"><a href="galeria.html" class="interactive image-overlay-container h-[70vh] bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/A3B18A/FFFFFF?text=Casamento+1');"></a></div>
+                    <div class="md:col-span-1 scroll-animate" style="transition-delay: 200ms;"><a href="galeria.html" class="interactive image-overlay-container h-[70vh] bg-cover bg-center" style="background-image: url('https://placehold.co/800x1000/EAE0D5/FFFFFF?text=Casamento+2');"></a></div>
+                    <div class="md:col-span-2 scroll-animate"><a href="galeria.html" class="interactive image-overlay-container h-[60vh] bg-cover bg-center" style="background-image: url('https://placehold.co/1600x900/BDB7AB/FFFFFF?text=Casamento+3');"></a></div>
                 </div>
-                 <div class="text-center mt-12">
-                     <a href="#" class="px-8 py-3 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors duration-300 text-sm tracking-widest uppercase">Ver galeria completa</a>
-                 </div>
+                 <div class="text-center mt-12 scroll-animate"><a href="galeria.html" class="interactive px-8 py-3 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors text-sm tracking-widest uppercase">Ver galeria completa</a></div>
             </div>
         </section>
 
-        <!-- Formulário de Contato -->
-        <section id="contact" class="py-24 md:py-32 bg-[#F5F3F0]">
+        <!-- Contato -->
+        <section id="contact" class="py-24 md:py-32 bg-[#F5F3F0] overflow-hidden">
             <div class="container mx-auto px-6 md:px-10">
-                 <div class="text-center max-w-2xl mx-auto">
-                     <h2 class="font-serif-elegant text-5xl md:text-6xl font-semibold">Vamos criar algo lindo juntos?</h2>
-                     <p class="font-sans-body text-base mt-4 leading-relaxed text-gray-600">Adoraríamos saber mais sobre seu casamento. Preencha o formulário abaixo ou envie um e-mail para <a href="mailto:contato@sentido.com" class="link-underline">contato@sentido.com</a>.</p>
-                </div>
-                <form class="mt-16 max-w-2xl mx-auto space-y-6">
-                    <div>
-                        <input type="text" placeholder="Seu nome" class="w-full p-4 bg-transparent border-b border-gray-400 focus:outline-none focus:border-gray-900 transition-colors font-sans-body">
-                    </div>
-                    <div>
-                         <input type="email" placeholder="Seu e-mail" class="w-full p-4 bg-transparent border-b border-gray-400 focus:outline-none focus:border-gray-900 transition-colors font-sans-body">
-                    </div>
-                    <div>
-                        <textarea placeholder="Sua mensagem" rows="4" class="w-full p-4 bg-transparent border-b border-gray-400 focus:outline-none focus:border-gray-900 transition-colors font-sans-body"></textarea>
-                    </div>
-                    <div class="text-center pt-6">
-                        <button type="submit" class="px-10 py-4 bg-gray-900 text-white hover:bg-[#A3B18A] hover:text-white transition-colors duration-300 text-sm tracking-widest uppercase">
-                            Enviar Mensagem
-                        </button>
-                    </div>
+                 <div class="text-center max-w-2xl mx-auto scroll-animate"><h2 class="font-serif-elegant text-5xl md:text-6xl font-semibold">Vamos criar algo lindo juntos?</h2><p class="font-sans-body text-base mt-4 leading-relaxed text-gray-600">Adoraríamos saber mais sobre seu casamento. Preencha o formulário abaixo ou envie um e-mail para <a href="mailto:contato@sentido.com" class="interactive link-underline">contato@sentido.com</a>.</p></div>
+                <form class="mt-16 max-w-2xl mx-auto space-y-6 scroll-animate">
+                    <div><input type="text" placeholder="Seu nome" class="interactive w-full p-4 bg-transparent border-b border-gray-400 focus:outline-none focus:border-gray-900 transition-colors font-sans-body"></div>
+                    <div><input type="email" placeholder="Seu e-mail" class="interactive w-full p-4 bg-transparent border-b border-gray-400 focus:outline-none focus:border-gray-900 transition-colors font-sans-body"></div>
+                    <div><textarea placeholder="Sua mensagem" rows="4" class="interactive w-full p-4 bg-transparent border-b border-gray-400 focus:outline-none focus:border-gray-900 transition-colors font-sans-body"></textarea></div>
+                    <div class="text-center pt-6"><button type="submit" class="interactive px-10 py-4 bg-gray-900 text-white hover:bg-[#A3B18A] hover:text-white transition-colors text-sm tracking-widest uppercase">Enviar Mensagem</button></div>
                 </form>
             </div>
         </section>
@@ -229,64 +132,91 @@
     <!-- Rodapé -->
     <footer class="bg-white py-16">
         <div class="container mx-auto px-6 md:px-10 text-center text-gray-600">
-            <a href="#hero" class="font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
+            <a href="index.html" class="interactive font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
             <div class="mt-8 flex justify-center space-x-8 text-xs tracking-widest uppercase">
-                 <a href="#about" class="link-underline">Sobre</a>
-                 <a href="#portfolio" class="link-underline">Portfólio</a>
-                 <a href="#contact" class="link-underline">Contato</a>
+                 <a href="sobre.html" class="interactive link-underline">Sobre</a>
+                 <a href="galeria.html" class="interactive link-underline">Portfólio</a>
+                 <a href="#contact" class="interactive link-underline">Contato</a>
             </div>
-            <p class="font-sans-body text-xs mt-8 text-gray-500">&copy; 2025 Sentido Fotografia. Todos os direitos reservados. Design inspirado por Tonic Site Shop.</p>
+            <p class="font-sans-body text-xs mt-8 text-gray-500">&copy; 2025 Sentido Fotografia. Todos os direitos reservados.</p>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // --- LÓGICA GERAL ---
+            const body = document.body;
+
+            // --- 1. CURSOR PERSONALIZADO ---
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            
+            gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
+            gsap.set(cursorOutline, { xPercent: -50, yPercent: -50 });
+
+            window.addEventListener('mousemove', e => {
+                gsap.to(cursorDot, 0.2, { x: e.clientX, y: e.clientY });
+                gsap.to(cursorOutline, 0.6, { x: e.clientX, y: e.clientY, ease: "power2.out" });
+            });
+
+            document.querySelectorAll('.interactive').forEach(el => {
+                el.addEventListener('mouseenter', () => body.classList.add('cursor-grow'));
+                el.addEventListener('mouseleave', () => body.classList.remove('cursor-grow'));
+            });
+
+            // --- 2. TRANSIÇÕES DE PÁGINA ---
+            body.style.opacity = '1'; // Inicia a página visível
+            document.querySelectorAll('a').forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('/') || href.includes('.html')) {
+                    link.addEventListener('click', e => {
+                        e.preventDefault();
+                        body.classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    });
+                }
+            });
+
+            // --- 3. ANIMAÇÕES DE SCROLL ---
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+
+            // --- LÓGICA DO MENU MOBILE ---
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-            const mobileLinks = document.querySelectorAll('.mobile-link');
-
             const openMenu = () => mobileMenu.classList.remove('translate-x-full');
             const closeMenu = () => mobileMenu.classList.add('translate-x-full');
-
             mobileMenuButton.addEventListener('click', openMenu);
             closeMobileMenuButton.addEventListener('click', closeMenu);
-            mobileLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    closeMenu();
-                    // Adiciona um pequeno delay para a animação do menu fechar antes de rolar
-                    setTimeout(() => {
-                        const targetId = link.getAttribute('href');
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    }, 300);
-                });
-            });
-            
-            // Lógica de Scroll Suave para links fora do menu mobile
-            document.querySelectorAll('a[href^="#"]:not(.mobile-link)').forEach(anchor => {
+
+            // --- LÓGICA DE SCROLL SUAVE PARA ÂNCORAS ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        e.preventDefault();
+                        closeMenu(); // Fecha o menu se estiver aberto
+                        setTimeout(() => {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }, 300);
                     }
                 });
             });
         });
     </script>
-
-
-<!-- 
-background-image: url('/Henrique-Melissa-Home.png'); -->
-
 
 </body>
 </html>
