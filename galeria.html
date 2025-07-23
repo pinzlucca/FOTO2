@@ -8,21 +8,6 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configuração de Cores Personalizadas para Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'brand-green': '#406341',
-                        'brand-orange': '#BC6C25',
-                        'brand-beige': '#EFEBE7',
-                    }
-                }
-            }
-        }
-    </script>
-    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,14 +20,17 @@
         .link-underline { position: relative; text-decoration: none; }
         .link-underline::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px; bottom: -2px; left: 0; background-color: #1a1a1a; transform-origin: bottom right; transition: transform 0.25s ease-out; }
         .link-underline:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        
         .gallery-item { display: block; cursor: pointer; overflow: hidden; background-color: #e2e8f0; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease-in-out; }
         .gallery-item:hover img { transform: scale(1.05); }
+
         .gallery-container { transition: opacity 0.5s ease-in-out; }
         .gallery-nav { position: fixed; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(4px); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 50; color: #333; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.2s ease; }
         .gallery-nav:hover { background-color: white; transform: translateY(-50%) scale(1.1); }
         #prev-gallery { left: 20px; }
         #next-gallery { right: 20px; }
+
         .lightbox { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.9); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .lightbox.active { opacity: 1; visibility: visible; }
         .lightbox-content { position: relative; max-width: 90vw; max-height: 90vh; }
@@ -51,6 +39,7 @@
         .lightbox-close { top: 1rem; right: 1rem; }
         .lightbox-prev { top: 50%; left: 1rem; transform: translateY(-50%); }
         .lightbox-next { top: 50%; right: 1rem; transform: translateY(-50%); }
+
     </style>
 </head>
 <body class="bg-[#FDFDFB]">
@@ -62,7 +51,7 @@
             <nav class="hidden md:flex items-center space-x-10 text-sm tracking-widest uppercase">
                 <a href="sobre.html" class="link-underline text-gray-800">Sobre</a>
                 <a href="galeria.html" class="link-underline text-gray-800 font-bold">Portfólio</a>
-                <a href="index.html#contact" class="ml-4 px-6 py-2 border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-colors">Contato</a>
+                <a href="index.html#contact" class="ml-4 px-6 py-2 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors">Contato</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden text-gray-800"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg></button>
         </div>
@@ -110,72 +99,106 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+
+            // ===================================================================
+            // ===== ÁREA DE GERENCIAMENTO FÁCIL DO PORTFÓLIO =====================
+            // ===================================================================
             const portfolioData = [
                 {
                     title: "Casamento Ana & João",
                     description: "Uma celebração íntima e cheia de emoção na serra, onde cada detalhe refletia a personalidade do casal.",
                     images: [
-                        { src: 'h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
-                        { src: 'h.png', layoutClasses: '' },
-                        { src: 'h.png', layoutClasses: 'lg:row-span-2' },
-                        { src: 'h.png', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x850/333333/FFFFFF?text=Ana+e+João+', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
-                        { src: 'https://placehold.co/600x500/A3B18A/FFFFFF?text=Ana+e+João+', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x900/BDB7AB/FFFFFF?text=Ana+e+João+', layoutClasses: 'lg:row-span-2' },
-                        { src: 'https://placehold.co/600x450/D1C8B9/FFFFFF?text=Ana+e+João+', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x950/EAE0D5/FFFFFF?text=Ana+e+João+', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: '' },
                     ]
                 },
                 {
                     title: "Ensaio Maria & Pedro",
                     description: "Um ensaio pré-casamento descontraído na praia, capturando a cumplicidade e a alegria do casal ao pôr do sol.",
                     images: [
-                        { src: 'https://placehold.co/600x800/BDB7AB/FFFFFF?text=Maria+e+Pedro+1', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
-                        { src: 'https://placehold.co/600x600/D1C8B9/FFFFFF?text=Maria+e+Pedro+2', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x750/EAE0D5/FFFFFF?text=Maria+e+Pedro+3', layoutClasses: 'lg:row-span-2' },
-                        { src: 'https://placehold.co/600x400/333333/FFFFFF?text=Maria+e+Pedro+4', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x850/A3B18A/FFFFFF?text=Maria+e+Pedro+5', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
-                        { src: 'https://placehold.co/600x500/BDB7AB/FFFFFF?text=Maria+e+Pedro+6', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x900/D1C8B9/FFFFFF?text=Maria+e+Pedro+7', layoutClasses: 'lg:row-span-2' },
-                        { src: 'https://placehold.co/600x450/EAE0D5/FFFFFF?text=Maria+e+Pedro+8', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x950/333333/FFFFFF?text=Maria+e+Pedro+9', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: '' },
                     ]
                 },
                 {
                     title: "Elopement Laura & Bruno",
                     description: "Uma fuga romântica para as montanhas. A beleza da simplicidade e do amor verdadeiro em cada clique.",
                     images: [
-                        { src: 'https://placehold.co/600x800/D1C8B9/FFFFFF?text=Laura+e+Bruno+1', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
-                        { src: 'https://placehold.co/600x600/EAE0D5/FFFFFF?text=Laura+e+Bruno+2', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x750/333333/FFFFFF?text=Laura+e+Bruno+3', layoutClasses: 'lg:row-span-2' },
-                        { src: 'https://placehold.co/600x400/A3B18A/FFFFFF?text=Laura+e+Bruno+4', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x850/BDB7AB/FFFFFF?text=Laura+e+Bruno+5', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
-                        { src: 'https://placehold.co/600x500/D1C8B9/FFFFFF?text=Laura+e+Bruno+6', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x900/EAE0D5/FFFFFF?text=Laura+e+Bruno+7', layoutClasses: 'lg:row-span-2' },
-                        { src: 'https://placehold.co/600x450/333333/FFFFFF?text=Laura+e+Bruno+8', layoutClasses: '' },
-                        { src: 'https://placehold.co/600x950/A3B18A/FFFFFF?text=Laura+e+Bruno+9', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: 'lg:row-span-2' },
+                        { src: 'images/h.png', layoutClasses: '' },
+                        { src: 'images/h.png', layoutClasses: '' },
                     ]
                 }
             ];
+            // ===================================================================
+            // FIM DA ÁREA DE GERENCIAMENTO
+            // ===================================================================
+
             const galleriesWrapper = document.getElementById('galleries-wrapper');
+
             function createGalleries() {
                 portfolioData.forEach((galleryData, index) => {
                     const galleryContainer = document.createElement('div');
                     galleryContainer.className = 'gallery-container';
-                    if (index > 0) galleryContainer.classList.add('hidden', 'absolute', 'inset-0');
+                    if (index > 0) {
+                        galleryContainer.classList.add('hidden', 'absolute', 'inset-0');
+                    }
+
                     let imagesHTML = '';
                     galleryData.images.forEach(image => {
-                        imagesHTML += `<a class="gallery-item ${image.layoutClasses}"><img src="${image.src}" alt="${galleryData.title} - Imagem" loading="lazy"></a>`;
+                        imagesHTML += `
+                            <a class="gallery-item ${image.layoutClasses}">
+                                <img src="${image.src}" alt="${galleryData.title} - Imagem" loading="lazy">
+                            </a>
+                        `;
                     });
-                    galleryContainer.innerHTML = `<section class="py-16 md:py-24 text-center"><div class="container mx-auto px-6 md:px-10"><h1 class="font-serif-elegant text-5xl md:text-7xl font-semibold">${galleryData.title}</h1><p class="font-sans-body text-base mt-4 max-w-2xl mx-auto text-gray-600">${galleryData.description}</p></div></section><section class="pb-24 md:pb-32"><div class="container mx-auto px-6 md:px-10"><div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4">${imagesHTML}</div></div></section>`;
+
+                    galleryContainer.innerHTML = `
+                        <section class="py-16 md:py-24 text-center">
+                            <div class="container mx-auto px-6 md:px-10">
+                                <h1 class="font-serif-elegant text-5xl md:text-7xl font-semibold">${galleryData.title}</h1>
+                                <p class="font-sans-body text-base mt-4 max-w-2xl mx-auto text-gray-600">${galleryData.description}</p>
+                            </div>
+                        </section>
+                        <section class="pb-24 md:pb-32">
+                            <div class="container mx-auto px-6 md:px-10">
+                                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4">
+                                    ${imagesHTML}
+                                </div>
+                            </div>
+                        </section>
+                    `;
                     galleriesWrapper.appendChild(galleryContainer);
                 });
             }
+
             createGalleries();
+
             const galleries = document.querySelectorAll('.gallery-container');
             const prevButton = document.getElementById('prev-gallery');
             const nextButton = document.getElementById('next-gallery');
             let currentGalleryIndex = 0;
+
             function showGallery(index) {
                 galleries.forEach((gallery, i) => {
                     const isCurrent = i === index;
@@ -186,13 +209,17 @@
                 });
                 window.scrollTo(0, 0);
             }
+
             nextButton.addEventListener('click', () => { currentGalleryIndex = (currentGalleryIndex + 1) % galleries.length; showGallery(currentGalleryIndex); });
             prevButton.addEventListener('click', () => { currentGalleryIndex = (currentGalleryIndex - 1 + galleries.length) % galleries.length; showGallery(currentGalleryIndex); });
+            
             showGallery(currentGalleryIndex);
+
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             let currentLightboxIndex = 0;
             let activeGalleryItems = [];
+
             function setupLightboxListeners() {
                 const allGalleryItems = document.querySelectorAll('.gallery-item');
                 allGalleryItems.forEach(item => {
@@ -204,16 +231,19 @@
                     });
                 });
             }
+            
             function showLightboxImage(index) {
                 const imgSrc = activeGalleryItems[index].querySelector('img').src;
                 lightboxImg.src = imgSrc;
                 currentLightboxIndex = index;
             }
+            
             setupLightboxListeners();
             document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.classList.remove('active'));
             document.querySelector('.lightbox-prev').addEventListener('click', () => showLightboxImage((currentLightboxIndex - 1 + activeGalleryItems.length) % activeGalleryItems.length));
             document.querySelector('.lightbox-next').addEventListener('click', () => showLightboxImage((currentLightboxIndex + 1) % activeGalleryItems.length));
             window.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
+
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMobileMenuButton = document.getElementById('close-mobile-menu');
