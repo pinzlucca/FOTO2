@@ -8,6 +8,21 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Configuração de Cores Personalizadas para Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-green': '#406341',
+                        'brand-orange': '#BC6C25',
+                        'brand-beige': '#EFEBE7',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,14 +31,10 @@
     <style>
         .font-serif-elegant { font-family: 'Cormorant Garamond', serif; }
         .font-sans-body { font-family: 'Inter', sans-serif; }
-        body { font-family: 'Inter', sans-serif; background-color: #FDFDFB; color: #1a1a1a; cursor: none; }
-        .custom-cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
-        .cursor-dot { width: 8px; height: 8px; background-color: #1a1a1a; border-radius: 50%; transition: transform 0.2s ease-out; }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid #1a1a1a; border-radius: 50%; transition: transform 0.2s ease-out, opacity 0.2s ease-out; }
-        .cursor-grow .cursor-outline { transform: scale(1.5); opacity: 0.5; }
-        .cursor-grow .cursor-dot { transform: scale(0.75); }
-        body { transition: opacity 0.5s ease-in-out; }
-        body.fade-out { opacity: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: #FDFDFB; color: #1a1a1a; }
+        .link-underline { position: relative; text-decoration: none; }
+        .link-underline::after { content: ''; position: absolute; width: 100%; transform: scaleX(0); height: 1px; bottom: -2px; left: 0; background-color: #1a1a1a; transform-origin: bottom right; transition: transform 0.25s ease-out; }
+        .link-underline:hover::after { transform: scaleX(1); transform-origin: bottom left; }
         .gallery-item { display: block; cursor: pointer; overflow: hidden; background-color: #e2e8f0; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease-in-out; }
         .gallery-item:hover img { transform: scale(1.05); }
@@ -44,109 +55,123 @@
 </head>
 <body class="bg-[#FDFDFB]">
 
-    <!-- Cursor Personalizado -->
-    <div class="custom-cursor cursor-outline"></div>
-    <div class="custom-cursor cursor-dot"></div>
-
     <!-- Cabeçalho -->
     <header class="sticky top-0 left-0 w-full z-40 bg-[#FDFDFB]/80 backdrop-blur-sm">
         <div class="container mx-auto px-6 md:px-10 py-6 flex justify-between items-center">
-            <a href="index.html" class="interactive font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
+            <a href="index.html" class="font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
             <nav class="hidden md:flex items-center space-x-10 text-sm tracking-widest uppercase">
-                <a href="sobre.html" class="interactive link-underline text-gray-800">Sobre</a>
-                <a href="galeria.html" class="interactive link-underline text-gray-800 font-bold">Portfólio</a>
-                <a href="index.html#contact" class="interactive ml-4 px-6 py-2 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition-colors">Contato</a>
+                <a href="sobre.html" class="link-underline text-gray-800">Sobre</a>
+                <a href="galeria.html" class="link-underline text-gray-800 font-bold">Portfólio</a>
+                <a href="index.html#contact" class="ml-4 px-6 py-2 border border-brand-green text-brand-green hover:bg-brand-green hover:text-white transition-colors">Contato</a>
             </nav>
-            <button id="mobile-menu-button" class="interactive md:hidden text-gray-800"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg></button>
+            <button id="mobile-menu-button" class="md:hidden text-gray-800"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path></svg></button>
         </div>
     </header>
     
     <!-- Menu Mobile -->
     <div id="mobile-menu" class="fixed inset-0 bg-[#FDFDFB] z-[100] flex flex-col items-center justify-center transition-transform duration-300 transform translate-x-full">
-        <button id="close-mobile-menu" class="interactive absolute top-7 right-7 text-gray-800"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+        <button id="close-mobile-menu" class="absolute top-7 right-7 text-gray-800"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg></button>
         <nav class="flex flex-col items-center space-y-10 text-2xl tracking-widest uppercase">
-            <a href="sobre.html" class="interactive mobile-link">Sobre</a>
-            <a href="galeria.html" class="interactive mobile-link">Portfólio</a>
-            <a href="index.html#contact" class="interactive mobile-link">Contato</a>
+            <a href="sobre.html" class="mobile-link">Sobre</a>
+            <a href="galeria.html" class="mobile-link">Portfólio</a>
+            <a href="index.html#contact" class="mobile-link">Contato</a>
         </nav>
     </div>
 
     <main class="pt-12">
-        <!-- Contêiner para as Galerias -->
-        <div id="galleries-wrapper" class="relative">
-            <!-- Galeria 1: Casamento Ana & João -->
-            <div class="gallery-container">
-                <section class="py-16 md:py-24 text-center"><div class="container mx-auto px-6 md:px-10"><h1 class="font-serif-elegant text-5xl md:text-7xl font-semibold">Casamento Ana & João</h1><p class="font-sans-body text-base mt-4 max-w-2xl mx-auto text-gray-600">Uma celebração íntima e cheia de emoção na serra, onde cada detalhe refletia a personalidade do casal.</p></div></section>
-                <section class="pb-24 md:pb-32"><div class="container mx-auto px-6 md:px-10"><div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4">
-                    <a class="interactive gallery-item md:col-span-2 lg:col-span-1 lg:row-span-2"><img loading="lazy" src="https://placehold.co/600x800/A3B18A/FFFFFF?text=Ana+e+João+1" alt="Ana e João 1"></a>
-                    <a class="interactive gallery-item"><img loading="lazy" src="https://placehold.co/600x600/BDB7AB/FFFFFF?text=Ana+e+João+2" alt="Ana e João 2"></a>
-                    <a class="interactive gallery-item lg:row-span-2"><img loading="lazy" src="https://placehold.co/600x750/D1C8B9/FFFFFF?text=Ana+e+João+3" alt="Ana e João 3"></a>
-                    <a class="interactive gallery-item"><img loading="lazy" src="https://placehold.co/600x400/EAE0D5/FFFFFF?text=Ana+e+João+4" alt="Ana e João 4"></a>
-                    <a class="interactive gallery-item md:col-span-2 lg:col-span-1 lg:row-span-2"><img loading="lazy" src="https://placehold.co/600x850/333333/FFFFFF?text=Ana+e+João+5" alt="Ana e João 5"></a>
-                    <a class="interactive gallery-item"><img loading="lazy" src="https://placehold.co/600x500/A3B18A/FFFFFF?text=Ana+e+João+6" alt="Ana e João 6"></a>
-                    <a class="interactive gallery-item lg:row-span-2"><img loading="lazy" src="https://placehold.co/600x900/BDB7AB/FFFFFF?text=Ana+e+João+7" alt="Ana e João 7"></a>
-                    <a class="interactive gallery-item"><img loading="lazy" src="https://placehold.co/600x450/D1C8B9/FFFFFF?text=Ana+e+João+8" alt="Ana e João 8"></a>
-                    <a class="interactive gallery-item"><img loading="lazy" src="https://placehold.co/600x950/EAE0D5/FFFFFF?text=Ana+e+João+9" alt="Ana e João 9"></a>
-                </div></div></section>
-            </div>
-            <!-- Outras galerias aqui -->
-        </div>
+        <!-- O contêiner das galerias será preenchido pelo JavaScript -->
+        <div id="galleries-wrapper" class="relative"></div>
     </main>
     
-    <!-- Navegação e Lightbox -->
-    <button id="prev-gallery" class="interactive gallery-nav"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
-    <button id="next-gallery" class="interactive gallery-nav"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+    <!-- Navegação das Galerias -->
+    <button id="prev-gallery" class="gallery-nav"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg></button>
+    <button id="next-gallery" class="gallery-nav"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg></button>
+
+    <!-- Lightbox (Modal para Imagens) -->
     <div id="lightbox" class="lightbox">
-        <button class="interactive lightbox-close">&times;</button>
-        <button class="interactive lightbox-prev">&#10094;</button>
-        <button class="interactive lightbox-next">&#10095;</button>
+        <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev">&#10094;</button>
+        <button class="lightbox-next">&#10095;</button>
         <div class="lightbox-content"><img id="lightbox-img" src="" alt="Imagem em destaque"></div>
     </div>
 
     <!-- Rodapé -->
     <footer class="bg-white py-16">
         <div class="container mx-auto px-6 md:px-10 text-center text-gray-600">
-            <a href="index.html" class="interactive font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
+            <a href="index.html" class="font-serif-elegant text-3xl font-semibold tracking-wider text-gray-900">Sentido</a>
             <div class="mt-8 flex justify-center space-x-8 text-xs tracking-widest uppercase">
-                 <a href="sobre.html" class="interactive link-underline">Sobre</a>
-                 <a href="galeria.html" class="interactive link-underline">Portfólio</a>
-                 <a href="index.html#contact" class="interactive link-underline">Contato</a>
+                 <a href="sobre.html" class="link-underline">Sobre</a>
+                 <a href="galeria.html" class="link-underline">Portfólio</a>
+                 <a href="index.html#contact" class="link-underline">Contato</a>
             </div>
             <p class="font-sans-body text-xs mt-8 text-gray-500">&copy; 2025 Sentido Fotografia. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/gsap@3.12.2/dist/gsap.min.js"></script>
     <script>
-        // O mesmo script da página principal, adaptado para a galeria
         document.addEventListener('DOMContentLoaded', function () {
-            const body = document.body;
-            // Cursor
-            const cursorDot = document.querySelector('.cursor-dot');
-            const cursorOutline = document.querySelector('.cursor-outline');
-            gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
-            gsap.set(cursorOutline, { xPercent: -50, yPercent: -50 });
-            window.addEventListener('mousemove', e => {
-                gsap.to(cursorDot, 0.2, { x: e.clientX, y: e.clientY });
-                gsap.to(cursorOutline, 0.6, { x: e.clientX, y: e.clientY, ease: "power2.out" });
-            });
-            document.querySelectorAll('.interactive').forEach(el => {
-                el.addEventListener('mouseenter', () => body.classList.add('cursor-grow'));
-                el.addEventListener('mouseleave', () => body.classList.remove('cursor-grow'));
-            });
-            // Transições
-            body.style.opacity = '1';
-            document.querySelectorAll('a').forEach(link => {
-                const href = link.getAttribute('href');
-                if (href && (href.startsWith('/') || href.includes('.html')) && !href.startsWith('#')) {
-                    link.addEventListener('click', e => {
-                        e.preventDefault();
-                        body.classList.add('fade-out');
-                        setTimeout(() => { window.location.href = href; }, 500);
-                    });
+            const portfolioData = [
+                {
+                    title: "Casamento Ana & João",
+                    description: "Uma celebração íntima e cheia de emoção na serra, onde cada detalhe refletia a personalidade do casal.",
+                    images: [
+                        { src: 'h.png', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'https://placehold.co/600x600/BDB7AB/FFFFFF?text=Ana+e+João+2', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x750/D1C8B9/FFFFFF?text=Ana+e+João+3', layoutClasses: 'lg:row-span-2' },
+                        { src: 'https://placehold.co/600x400/EAE0D5/FFFFFF?text=Ana+e+João+4', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x850/333333/FFFFFF?text=Ana+e+João+5', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'https://placehold.co/600x500/A3B18A/FFFFFF?text=Ana+e+João+6', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x900/BDB7AB/FFFFFF?text=Ana+e+João+7', layoutClasses: 'lg:row-span-2' },
+                        { src: 'https://placehold.co/600x450/D1C8B9/FFFFFF?text=Ana+e+João+8', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x950/EAE0D5/FFFFFF?text=Ana+e+João+9', layoutClasses: '' },
+                    ]
+                },
+                {
+                    title: "Ensaio Maria & Pedro",
+                    description: "Um ensaio pré-casamento descontraído na praia, capturando a cumplicidade e a alegria do casal ao pôr do sol.",
+                    images: [
+                        { src: 'https://placehold.co/600x800/BDB7AB/FFFFFF?text=Maria+e+Pedro+1', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'https://placehold.co/600x600/D1C8B9/FFFFFF?text=Maria+e+Pedro+2', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x750/EAE0D5/FFFFFF?text=Maria+e+Pedro+3', layoutClasses: 'lg:row-span-2' },
+                        { src: 'https://placehold.co/600x400/333333/FFFFFF?text=Maria+e+Pedro+4', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x850/A3B18A/FFFFFF?text=Maria+e+Pedro+5', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'https://placehold.co/600x500/BDB7AB/FFFFFF?text=Maria+e+Pedro+6', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x900/D1C8B9/FFFFFF?text=Maria+e+Pedro+7', layoutClasses: 'lg:row-span-2' },
+                        { src: 'https://placehold.co/600x450/EAE0D5/FFFFFF?text=Maria+e+Pedro+8', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x950/333333/FFFFFF?text=Maria+e+Pedro+9', layoutClasses: '' },
+                    ]
+                },
+                {
+                    title: "Elopement Laura & Bruno",
+                    description: "Uma fuga romântica para as montanhas. A beleza da simplicidade e do amor verdadeiro em cada clique.",
+                    images: [
+                        { src: 'https://placehold.co/600x800/D1C8B9/FFFFFF?text=Laura+e+Bruno+1', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'https://placehold.co/600x600/EAE0D5/FFFFFF?text=Laura+e+Bruno+2', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x750/333333/FFFFFF?text=Laura+e+Bruno+3', layoutClasses: 'lg:row-span-2' },
+                        { src: 'https://placehold.co/600x400/A3B18A/FFFFFF?text=Laura+e+Bruno+4', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x850/BDB7AB/FFFFFF?text=Laura+e+Bruno+5', layoutClasses: 'md:col-span-2 lg:col-span-1 lg:row-span-2' },
+                        { src: 'https://placehold.co/600x500/D1C8B9/FFFFFF?text=Laura+e+Bruno+6', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x900/EAE0D5/FFFFFF?text=Laura+e+Bruno+7', layoutClasses: 'lg:row-span-2' },
+                        { src: 'https://placehold.co/600x450/333333/FFFFFF?text=Laura+e+Bruno+8', layoutClasses: '' },
+                        { src: 'https://placehold.co/600x950/A3B18A/FFFFFF?text=Laura+e+Bruno+9', layoutClasses: '' },
+                    ]
                 }
-            });
-            // Carrossel de Galerias
+            ];
+            const galleriesWrapper = document.getElementById('galleries-wrapper');
+            function createGalleries() {
+                portfolioData.forEach((galleryData, index) => {
+                    const galleryContainer = document.createElement('div');
+                    galleryContainer.className = 'gallery-container';
+                    if (index > 0) galleryContainer.classList.add('hidden', 'absolute', 'inset-0');
+                    let imagesHTML = '';
+                    galleryData.images.forEach(image => {
+                        imagesHTML += `<a class="gallery-item ${image.layoutClasses}"><img src="${image.src}" alt="${galleryData.title} - Imagem" loading="lazy"></a>`;
+                    });
+                    galleryContainer.innerHTML = `<section class="py-16 md:py-24 text-center"><div class="container mx-auto px-6 md:px-10"><h1 class="font-serif-elegant text-5xl md:text-7xl font-semibold">${galleryData.title}</h1><p class="font-sans-body text-base mt-4 max-w-2xl mx-auto text-gray-600">${galleryData.description}</p></div></section><section class="pb-24 md:pb-32"><div class="container mx-auto px-6 md:px-10"><div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-3 gap-4">${imagesHTML}</div></div></section>`;
+                    galleriesWrapper.appendChild(galleryContainer);
+                });
+            }
+            createGalleries();
             const galleries = document.querySelectorAll('.gallery-container');
             const prevButton = document.getElementById('prev-gallery');
             const nextButton = document.getElementById('next-gallery');
@@ -164,27 +189,31 @@
             nextButton.addEventListener('click', () => { currentGalleryIndex = (currentGalleryIndex + 1) % galleries.length; showGallery(currentGalleryIndex); });
             prevButton.addEventListener('click', () => { currentGalleryIndex = (currentGalleryIndex - 1 + galleries.length) % galleries.length; showGallery(currentGalleryIndex); });
             showGallery(currentGalleryIndex);
-            // Lightbox
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
-            const allGalleryItems = document.querySelectorAll('.gallery-item');
             let currentLightboxIndex = 0;
             let activeGalleryItems = [];
-            function updateActiveGalleryItems() { activeGalleryItems = Array.from(galleries[currentGalleryIndex].querySelectorAll('.gallery-item')); }
-            function showLightboxImage(index) { updateActiveGalleryItems(); const imgSrc = activeGalleryItems[index].querySelector('img').src; lightboxImg.src = imgSrc; currentLightboxIndex = index; }
-            allGalleryItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    updateActiveGalleryItems();
-                    const itemIndex = activeGalleryItems.indexOf(item);
-                    lightbox.classList.add('active');
-                    showLightboxImage(itemIndex);
+            function setupLightboxListeners() {
+                const allGalleryItems = document.querySelectorAll('.gallery-item');
+                allGalleryItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        activeGalleryItems = Array.from(galleries[currentGalleryIndex].querySelectorAll('.gallery-item'));
+                        const itemIndex = activeGalleryItems.indexOf(item);
+                        lightbox.classList.add('active');
+                        showLightboxImage(itemIndex);
+                    });
                 });
-            });
+            }
+            function showLightboxImage(index) {
+                const imgSrc = activeGalleryItems[index].querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                currentLightboxIndex = index;
+            }
+            setupLightboxListeners();
             document.querySelector('.lightbox-close').addEventListener('click', () => lightbox.classList.remove('active'));
             document.querySelector('.lightbox-prev').addEventListener('click', () => showLightboxImage((currentLightboxIndex - 1 + activeGalleryItems.length) % activeGalleryItems.length));
             document.querySelector('.lightbox-next').addEventListener('click', () => showLightboxImage((currentLightboxIndex + 1) % activeGalleryItems.length));
             window.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
-            // Menu Mobile
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const closeMobileMenuButton = document.getElementById('close-mobile-menu');
